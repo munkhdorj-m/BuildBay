@@ -1,0 +1,70 @@
+.user-profile {
+  margin: 20px;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #fff;
+  box-shadow: 0px 0px 5px #ccc;
+}
+
+.user-profile-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.user-profile-name {
+  margin: 0;
+  font-size: 24px;
+}
+
+.user-profile-email {
+  margin: 0;
+  font-size: 16px;
+  color: #666;
+}
+
+.user-profile-details-section {
+  margin-bottom: 20px;
+}
+
+.user-profile-section-title {
+  margin-top: 0;
+  margin-bottom: 10px;
+  font-size: 20px;
+}
+
+.user-profile-details-row {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.user-profile-details-label {
+  margin: 0;
+  font-weight: bold;
+  width: 100px;
+}
+
+.user-profile-details-value {
+  margin: 0;
+}
+
+.user-profile-order-history-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.user-profile-order-history-table th {
+  text-align: left;
+  font-weight: bold;
+  padding: 10px;
+  background-color: #f2f2f2;
+  border-bottom: 1px solid #ccc;
+}
+
+.user-profile-order-history-table td {
+  padding: 10px;
+  border-bottom: 1px solid #ccc;
+}

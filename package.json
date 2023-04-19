@@ -1,0 +1,43 @@
+{
+  "name": "buildbay",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@emailjs/browser": "^3.10.0",
+    "@emotion/react": "^11.10.6",
+    "@emotion/styled": "^11.10.6",
+    "@mui/icons-material": "^5.11.11",
+    "@mui/material": "^5.11.12",
+    "@react-three/drei": "^9.57.2",
+    "@react-three/fiber": "^8.12.0",
+    "framer-motion": "^10.2.4",
+    "leva": "^0.9.34",
+    "maath": "^0.5.2",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-icons": "^4.8.0",
+    "react-parallax-tilt": "^1.7.114",
+    "react-redux": "^8.0.5",
+    "react-router-dom": "^6.9.0",
+    "react-stripe-checkout": "^2.6.3",
+    "react-use-gesture": "^9.1.3",
+    "react-vertical-timeline-component": "^3.6.0",
+    "styled-components": "^5.3.8",
+    "three": "^0.151.3",
+    "three-csg-ts": "^3.1.13",
+    "valtio": "^1.10.4"
+  },
+  "devDependencies": {
+    "@types/react": "^18.0.27",
+    "@types/react-dom": "^18.0.10",
+    "@vitejs/plugin-react": "^3.1.0",
+    "tailwindcss": "^3.2.7",
+    "vite": "^4.2.2"
+  }
+}
