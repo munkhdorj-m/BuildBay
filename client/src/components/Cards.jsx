@@ -11,35 +11,35 @@ function Cards() {
           <ul className="cards__items">
             <CardItem
               src="https://i.ibb.co/vqhS1mx/DALL-E-2023-04-18-22-30-19-Lumber-and-wood-products-A-rustic-wooden-fence-surrounding-a-beautiful-ga.png"
-              text="Explore the hidden waterfall deep inside the Amazon Jungle"
-              label="Adventure"
-              path="/services"
+              text="Манай дээд зэрэглэлийн модон сандлаар хэв маягаа тайвшруулаарай"
+              label="Сандал"
+              path="/products"
             />
             <CardItem
               src="https://i.ibb.co/BBKDfqN/DALL-E-2023-04-18-22-30-30-Lumber-and-wood-products-A-rustic-wooden-fence-surrounding-a-beautiful-ga.png"
-              text="Travel through the Islands of Bali in a Private Cruise"
-              label="Luxury"
-              path="/services"
+              text="Дээд зэрэглэлийн модон сандал ашиглан гадаа тав тухтай өнгөрүүлээрэй"
+              label="Сандал"
+              path="/products"
             />
           </ul>
           <ul className="cards__items">
             <CardItem
               src="https://i.ibb.co/MnWSp0p/DALL-E-2023-04-18-22-56-12-Flooring-materials-A-beautiful-wooden-floor-with-intricate-patterns-surro.png"
-              text="Set Sail in the Atlantic Ocean visiting Uncharted Waters"
-              label="Mystery"
-              path="/services"
+              text="Таныг суугаад алжаалаа тайлахыг урьж байна"
+              label="Шал"
+              path="/products"
             />
             <CardItem
               src="https://i.ibb.co/xHgZpQK/DALL-E-2023-04-18-22-31-48-Flooring-materials-A-beautiful-wooden-floor-with-intricate-patterns-surro.png"
-              text="Experience Football on Top of the Himilayan Mountains"
-              label="Adventure"
+              text="Тав тухтай түшлэгтэй сандалын хамт"
+              label="Шал"
               path="/products"
             />
             <CardItem
               src="https://i.ibb.co/4sSdZR1/DALL-E-2023-04-18-22-31-51-Flooring-materials-A-beautiful-wooden-floor-with-intricate-patterns-surro.png"
-              text="Ride through the Sahara Desert on a guided camel tour"
-              label="Adrenaline"
-              path="/sign-up"
+              text="Нарийн хээ угалз бүхий гоёмсог модон шал."
+              label="Шал"
+              path="/products"
             />
           </ul>
         </div>
