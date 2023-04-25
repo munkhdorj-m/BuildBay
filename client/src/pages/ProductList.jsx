@@ -7,6 +7,7 @@ import Footer from "../components/Footer";
 import { mobile } from "../responsive";
 import Three from "../components/three/Three";
 import { useState } from "react";
+import { useLocation } from "react-router-dom";
 
 const Container = styled.div``;
 
@@ -39,6 +40,8 @@ const Select = styled.select`
 const Option = styled.option``;
 
 const ProductList = () => {
+  const location = useLocation();
+  console.log(location);
   const [dataFromChild, setDataFromChild] = useState("");
 
   const handleDataFromChild = (data) => {
