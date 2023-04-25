@@ -27,16 +27,19 @@ export const categories = [
     id: 1,
     img: "DoorPictures/D_Caoba_Comercial.png",
     title: "Caoba Comercial",
+    cat: "women",
   },
   {
     id: 2,
     img: "DoorPictures/D_Chocolate.png",
     title: "Chocolate",
+    cat: "door",
   },
   {
     id: 3,
     img: "DoorPictures/D_Early_American.png",
     title: "American",
+    cat: "man",
   },
 ];
 

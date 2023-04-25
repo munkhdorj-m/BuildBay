@@ -81,8 +81,8 @@ const Products = ({ onData }) => {
   return (
     <Container>
       {allProducts.map((item) => (
-        <div>
-          <ProductContainer key={item.id}>
+        <div key={item.id}>
+          <ProductContainer>
             <Circle />
             <Image src={item.img} />
             <Info>
