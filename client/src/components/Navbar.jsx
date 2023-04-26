@@ -5,10 +5,11 @@ import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { mobile } from "../responsive";
 import SearchBar from "./SearchBar";
+import { useSelector } from "react-redux";
 
 const links = [
   { to: "/products", label: "Бүх бараа" },
-  { to: "/products", label: "Хаалга" },
+  { to: "/products/haalga", label: "Хаалга" },
   // { to: "/products", label: "Обой" },
   // { to: "/products", label: "Цонх" },
   // { to: "/products", label: "Шал" },
@@ -24,21 +25,22 @@ const NavContainer = styled.nav`
   filter: drop-shadow(0 6px 20px rgba(56, 125, 255, 0.017));
   background-color: #f8f9fa;
   ${mobile({ height: "50px" })};
+  text-decoration: none;
 `;
 
-const NavLogo = styled(Link)`
+const NavLogo = styled.div`
   display: flex;
   align-items: center;
   font-size: 1.5rem;
   font-weight: bold;
   text-decoration: none;
   color: #22202e;
-
   ${mobile({ fontSize: "24px" })}
 `;
 
 const NavLinks = styled.ul`
   display: flex;
+  text-decoration: none;
   justify-content: center;
   align-items: center;
   list-style: none;
@@ -96,21 +98,24 @@ const Button = styled.button`
 `;
 
 function Navbar() {
+  const quantity = useSelector((state) => state.cart.quantity);
+  console.log(quantity);
   return (
     <NavContainer>
-      <NavLogo to="/">
-        <img
-          src="logo.png"
-          style={{
-            width: 60,
-            height: 60,
-            borderRadius: "50px",
-            marginRight: 10,
-            top: 0,
-          }}
-        ></img>
-        LOGO
-      </NavLogo>
+      <Link to="/ " style={{ textDecoration: "none" }}>
+        <NavLogo>
+          <img
+            src="https://i.ibb.co/WPgnFPq/image.png"
+            style={{
+              width: 60,
+              height: 60,
+              marginRight: 10,
+              top: 0,
+            }}
+          ></img>
+          LOGO
+        </NavLogo>
+      </Link>
       <NavLinks>
         {links.map((link) => (
           <NavItem key={link.to}>
@@ -125,7 +130,7 @@ function Navbar() {
         <SearchBar />
         <Search />
         <Link to="/cart ">
-          <Badge badgeContent={4} color={"primary"}>
+          <Badge badgeContent={quantity} color={"primary"}>
             <ShoppingCart>Сагс</ShoppingCart>
           </Badge>
         </Link>

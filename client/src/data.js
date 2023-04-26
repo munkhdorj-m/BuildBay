@@ -27,16 +27,19 @@ export const categories = [
     id: 1,
     img: "DoorPictures/D_Caoba_Comercial.png",
     title: "Caoba Comercial",
+    cat: "women",
   },
   {
     id: 2,
     img: "DoorPictures/D_Chocolate.png",
     title: "Chocolate",
+    cat: "door",
   },
   {
     id: 3,
     img: "DoorPictures/D_Early_American.png",
     title: "American",
+    cat: "man",
   },
 ];
 
@@ -44,22 +47,22 @@ export const allProducts = [
   {
     id: 1,
     category: "door",
-    img: "DoorPictures/D_Caoba_Comercial.png",
+    img: "https://i.ibb.co/5s56k1R/D-Caoba-Comercial.png",
   },
   {
     id: 2,
     category: "door",
-    img: "DoorPictures/D_Chocolate.png",
+    img: "https://i.ibb.co/Sff05y0/D-Chocolate.png",
   },
   {
     id: 3,
     category: "door",
-    img: "DoorPictures/D_Early_American.png",
+    img: "https://i.ibb.co/3pYdwbw/D-Early-American.png",
   },
   {
     id: 4,
     category: "door",
-    img: "DoorPictures/D_Olmo.png",
+    img: "https://i.ibb.co/HGY2jXS/D-Olmo.png",
   },
 ];
 

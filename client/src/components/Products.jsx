@@ -6,7 +6,9 @@ import {
   ShoppingCartOutlined,
 } from "@mui/icons-material";
 import { Link } from "react-router-dom";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import axios, { all } from "axios";
+import { addProduct } from "../redux/cartRedux";
 
 const Info = styled.div`
   opacity: 0;
@@ -75,38 +77,76 @@ const Container = styled.div`
   justify-content: space-between;
 `;
 
-const Products = ({ onData }) => {
-  const [data, setData] = useState("");
+const Products = ({ cat, filters, sort }) => {
+  const [products, setProducts] = useState();
+  const [filteredProducts, setFilteredProducts] = useState();
+
+  useEffect(() => {
+    const getProducts = async () => {
+      try {
+        const res = await axios.get(
+          cat
+            ? `http://localhost:5000/api/products?category=${cat}`
+            : `http://localhost:5000/api/products`
+        );
+        setProducts(res.data);
+      } catch (error) {}
+    };
+    getProducts();
+  }, [cat]);
+
+  // useEffect(() => {
+  //   cat &&
+  //     products &&
+  //     filters &&
+  //     setFilteredProducts(
+  //       products.filter((item) =>
+  //         Object.entries(filters).every(([key, value]) =>
+  //           item[key].includes(value)
+  //         )
+  //       )
+  //     );
+  // }, [products, cat, filters]);
+
+  // useEffect(() => {
+  //   if ((sort = "newest")) {
+  //     setFilteredProducts((prev) =>
+  //       [...prev].sort((a, b) => a.createdAt - b.createdAt)
+  //     );
+  //   } else if ((sort = "asc")) {
+  //     setFilteredProducts((prev) =>
+  //       [...prev].sort((a, b) => a.price - b.price)
+  //     );
+  //   } else {
+  //     setFilteredProducts((prev) =>
+  //       [...prev].sort((a, b) => a.price - b.price)
+  //     );
+  //   }
+  // }, [sort]);
+  console.log(filteredProducts);
 
   return (
     <Container>
-      {allProducts.map((item) => (
-        <div>
-          <ProductContainer key={item.id}>
+      {products &&
+        products.map((item) => (
+          <ProductContainer key={item._id}>
             <Circle />
             <Image src={item.img} />
             <Info>
               <Icon>
-                <Link to="/product">
+                <Link to={`/product/${item._id}`}>
                   <ShoppingCartOutlined />
                 </Link>
               </Icon>
-              <div
-                onClick={() => {
-                  onData(item.img);
-                }}
-              >
-                <Icon>
-                  <SearchOutlined />
-                </Icon>
-              </div>
+              <Icon>
+                <SearchOutlined />
+              </Icon>
               <Icon>
                 <FavoriteBorderOutlined />
               </Icon>
             </Info>
           </ProductContainer>
-        </div>
-      ))}
+        ))}
     </Container>
   );
 };

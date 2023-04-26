@@ -1,4 +1,4 @@
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
 import Home from "./pages/Home";
 import Cart from "./pages/Cart";
 import Product from "./pages/Product";
@@ -8,15 +8,23 @@ import Login from "./pages/Login";
 import Register from "./pages/Register";
 
 function App() {
+  const user = true;
   return (
     <Routes>
       <Route path="/" exact element={<Home />} />
       <Route path="/cart" element={<Cart />} />
-      <Route path="/login" element={<Login />} />
+      <Route
+        path="/login"
+        element={user ? <Navigate to="/" replace /> : <Login />}
+      />
       <Route path="/register" element={<Register />} />
-      <Route path="/product" element={<Product />} />
+      <Route path="/product" element={<Product />}>
+        <Route path=":id" element={<ProductList />} />
+      </Route>
       <Route path="/profile" element={<UserProfile />} />
-      <Route path="/products" element={<ProductList />} />
+      <Route path="/products" element={<ProductList />}>
+        <Route path=":category" element={<ProductList />} />
+      </Route>
     </Routes>
   );
 }
