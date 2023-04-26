@@ -18,7 +18,9 @@ function App() {
         element={user ? <Navigate to="/" replace /> : <Login />}
       />
       <Route path="/register" element={<Register />} />
-      <Route path="/product/:id" element={<Product />} />
+      <Route path="/product" element={<Product />}>
+        <Route path=":id" element={<ProductList />} />
+      </Route>
       <Route path="/profile" element={<UserProfile />} />
       <Route path="/products" element={<ProductList />}>
         <Route path=":category" element={<ProductList />} />

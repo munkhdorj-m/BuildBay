@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { mobile } from "../responsive";
 import SearchBar from "./SearchBar";
+import { useSelector } from "react-redux";
 
 const links = [
   { to: "/products", label: "Бүх бараа" },
@@ -97,16 +98,17 @@ const Button = styled.button`
 `;
 
 function Navbar() {
+  const quantity = useSelector((state) => state.cart.quantity);
+  console.log(quantity);
   return (
     <NavContainer>
       <Link to="/ " style={{ textDecoration: "none" }}>
         <NavLogo>
           <img
-            src="logo.png"
+            src="https://i.ibb.co/WPgnFPq/image.png"
             style={{
               width: 60,
               height: 60,
-              borderRadius: "50px",
               marginRight: 10,
               top: 0,
             }}
@@ -128,7 +130,7 @@ function Navbar() {
         <SearchBar />
         <Search />
         <Link to="/cart ">
-          <Badge badgeContent={4} color={"primary"}>
+          <Badge badgeContent={quantity} color={"primary"}>
             <ShoppingCart>Сагс</ShoppingCart>
           </Badge>
         </Link>
