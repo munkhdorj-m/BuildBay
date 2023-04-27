@@ -25,8 +25,8 @@ const ImgContainer = styled.div`
 `;
 
 const Image = styled.img`
-  width: 100%;
-  height: 90vh;
+  width: 80%;
+  height: 80vh;
   object-fit: cover;
   ${mobile({ height: "40vh" })}
 `;
@@ -148,7 +148,15 @@ const Product = () => {
   };
 
   const handleClick = () => {
-    dispatch(addProduct({ product, quantity }));
+    dispatch(
+      addProduct({
+        ...product,
+        quantity,
+        color,
+        size,
+        price: product.price * quantity,
+      })
+    );
   };
   return (
     <Container>
@@ -191,7 +199,7 @@ const Product = () => {
               <Amount>{quantity}</Amount>
               <Add onClick={() => handleQuantity("inc")} />
             </AmountContainer>
-            <Button onClick={handleClick}>ADD TO CART</Button>
+            <Button onClick={handleClick}>Сансанд хийх</Button>
           </AddContainer>
         </InfoContainer>
       </Wrapper>

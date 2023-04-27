@@ -1,14 +1,18 @@
 import styled from "styled-components";
 import { mobile } from "../responsive";
+import { useState } from "react";
+import Alert from "@mui/material/Alert";
+import { register } from "../redux/apiCalls";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 const Container = styled.div`
   width: 100vw;
   height: 100vh;
   background: linear-gradient(
-      rgba(255, 255, 255, 0.5),
-      rgba(255, 255, 255, 0.5)
-    ),
-
+    rgba(255, 255, 255, 0.5),
+    rgba(255, 255, 255, 0.5)
+  );
   background-size: cover;
   display: flex;
   align-items: center;
@@ -51,26 +55,89 @@ const Button = styled.button`
   background-color: teal;
   color: white;
   cursor: pointer;
+  &:hover {
+    background: #22202e;
+  }
+  &:active {
+    transform: translateY(4px);
+  }
+`;
+
+const Error = styled.span`
+  color: red;
 `;
 
 const Register = () => {
+  const [firstname, setFirstName] = useState("");
+  const [lastname, setLastName] = useState("");
+  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const dispatch = useDispatch();
+  const { isFetching } = useSelector((state) => state.user);
+  let navigate = useNavigate();
+
+  const handleClick = async (e) => {
+    e.preventDefault();
+    try {
+      await register(dispatch, {
+        firstname,
+        lastname,
+        username,
+        email,
+        password,
+      });
+      alert("Registration successful");
+      navigate("/");
+      // Registration successful
+    } catch (error) {
+      // Registration failed, handle error
+      alert("Registration failed");
+      console.error(error);
+    }
+  };
+
   return (
     <Container>
       <Wrapper>
         <Title>CREATE AN ACCOUNT</Title>
         <Form>
-          <Input placeholder="name" />
-          <Input placeholder="last name" />
-          <Input placeholder="username" />
-          <Input placeholder="email" />
-          <Input placeholder="password" />
-          <Input placeholder="confirm password" />
+          <Input
+            placeholder="name"
+            onChange={(e) => setFirstName(e.target.value)}
+          />
+          <Input
+            placeholder="last name"
+            onChange={(e) => setLastName(e.target.value)}
+          />
+          <Input
+            placeholder="username"
+            onChange={(e) => setUsername(e.target.value)}
+          />
+          <Input
+            placeholder="email"
+            onChange={(e) => setEmail(e.target.value)}
+          />
+          <Input
+            type="password"
+            placeholder="password"
+            onChange={(e) => setPassword(e.target.value)}
+          />
+          <Input
+            type="password"
+            placeholder="confirm password"
+            onChange={(e) => setConfirmPassword(e.target.value)}
+          />
+
           <Agreement>
             By creating an account, I consent to the processing of my personal
             data in accordance with the <b>PRIVACY POLICY</b>
           </Agreement>
-          <Button>CREATE</Button>
+
+          <Button onClick={handleClick}>CREATE</Button>
         </Form>
+        {password !== confirmPassword && <Error>Passwords do not match</Error>}
       </Wrapper>
     </Container>
   );

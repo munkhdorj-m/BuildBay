@@ -5,8 +5,9 @@ import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { mobile } from "../responsive";
 import SearchBar from "./SearchBar";
-import { useSelector } from "react-redux";
-
+import { useDispatch, useSelector } from "react-redux";
+import { logout } from "../redux/apiCalls";
+import { resetCart } from "../redux/cartRedux";
 const links = [
   { to: "/products", label: "Бүх бараа" },
   { to: "/products/haalga", label: "Хаалга" },
@@ -82,8 +83,8 @@ const Button = styled.button`
   align-items: center;
   padding: 20px 30px;
   gap: 20px;
-  background: #5a45f2;
   border-radius: 8px;
+  background: #5a45f2;
   box-shadow: 0 2px #666;
   &:hover {
     background: #22202e;
@@ -99,7 +100,17 @@ const Button = styled.button`
 
 function Navbar() {
   const quantity = useSelector((state) => state.cart.quantity);
-  console.log(quantity);
+  const user = useSelector((state) => state.user.currentUser);
+  const dispatch = useDispatch();
+  const handleClick = (e) => {
+    e.preventDefault();
+    logout(dispatch);
+    console.log("sdss");
+  };
+
+  const handleReset = () => {
+    dispatch(resetCart());
+  };
   return (
     <NavContainer>
       <Link to="/ " style={{ textDecoration: "none" }}>
@@ -134,12 +145,24 @@ function Navbar() {
             <ShoppingCart>Сагс</ShoppingCart>
           </Badge>
         </Link>
-        <Link to="/profile">
-          <AccountCircle />
-        </Link>
-        <Link to="/login" style={{ textDecoration: "none" }}>
-          <Button>Нэвтрэх</Button>
-        </Link>
+        {user ? (
+          <>
+            <Link to="/profile">
+              <AccountCircle />
+            </Link>
+            <Button onClick={handleClick}>Гарах</Button>
+          </>
+        ) : (
+          <>
+            <Link to="/register" style={{ textDecoration: "none" }}>
+              <Button>Бүртгүүлэх</Button>
+            </Link>
+            <Link to="/login" style={{ textDecoration: "none" }}>
+              <Button style={{ background: "#39a043" }}>Нэвтрэх</Button>
+            </Link>
+          </>
+        )}
+        {/* <button onClick={handleReset}>Reset Cart</button> */}
       </SideActions>
     </NavContainer>
   );

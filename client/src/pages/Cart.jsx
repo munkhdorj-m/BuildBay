@@ -4,6 +4,8 @@ import Announcement from "../components/Announcement";
 import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
 import { mobile } from "../responsive";
+import { useDispatch, useSelector } from "react-redux";
+import { removeItem } from "../redux/cartRedux";
 
 const Container = styled.div``;
 
@@ -54,6 +56,7 @@ const Info = styled.div`
 `;
 
 const Product = styled.div`
+  padding-top: 10px;
   display: flex;
   justify-content: space-between;
   ${mobile({ flexDirection: "column" })}
@@ -153,6 +156,13 @@ const Button = styled.button`
 `;
 
 const Cart = () => {
+  const cart = useSelector((state) => state.cart);
+  console.log(cart.products);
+  const dispatch = useDispatch();
+
+  const handleRemove = (id) => {
+    dispatch(removeItem(id));
+  };
   return (
     <Container>
       <Announcement />
@@ -169,63 +179,44 @@ const Cart = () => {
         </Top>
         <Bottom>
           <Info>
-            <Product>
-              <ProductDetail>
-                <Image src="DoorPictures\D_Caoba_Comercial.png" />
-                <Details>
-                  <ProductName>
-                    <b>Product:</b> Caoba Comercial
-                  </ProductName>
-                  <ProductId>
-                    <b>ID:</b> 93813718293
-                  </ProductId>
-                  <ProductColor color="black" />
-                  <ProductSize>
-                    <b>Size:</b> 37.5
-                  </ProductSize>
-                </Details>
-              </ProductDetail>
-              <PriceDetail>
-                <ProductAmountContainer>
-                  <Add />
-                  <ProductAmount>2</ProductAmount>
-                  <Remove />
-                </ProductAmountContainer>
-                <ProductPrice>50000₮</ProductPrice>
-              </PriceDetail>
-            </Product>
+            {cart.products.map((product) => (
+              <Product key={product._id}>
+                <ProductDetail>
+                  <Image src={product.img} />
+                  <Details>
+                    <ProductName>
+                      <b>Product:</b> {product.title}
+                    </ProductName>
+                    <ProductId>
+                      <b>ID:</b> {product._id}
+                    </ProductId>
+                    <ProductColor color={product.color} />
+                    <ProductSize>
+                      <b>Size:</b> {product.size}
+                    </ProductSize>
+                  </Details>
+                </ProductDetail>
+                <PriceDetail>
+                  <ProductAmountContainer>
+                    <Button onClick={() => handleRemove(product._id)}>
+                      Барааг хасах
+                    </Button>
+
+                    <ProductAmount>{product.quantity}ш</ProductAmount>
+                  </ProductAmountContainer>
+                  <ProductPrice>
+                    $ {product.price * product.quantity}
+                  </ProductPrice>
+                </PriceDetail>
+              </Product>
+            ))}
             <Hr />
-            <Product>
-              <ProductDetail>
-                <Image src="DoorPictures\D_Olmo.png" />
-                <Details>
-                  <ProductName>
-                    <b>Product:</b> D Olmo
-                  </ProductName>
-                  <ProductId>
-                    <b>ID:</b> 93813718293
-                  </ProductId>
-                  <ProductColor color="gray" />
-                  <ProductSize>
-                    <b>Size:</b> M
-                  </ProductSize>
-                </Details>
-              </ProductDetail>
-              <PriceDetail>
-                <ProductAmountContainer>
-                  <Add />
-                  <ProductAmount>1</ProductAmount>
-                  <Remove />
-                </ProductAmountContainer>
-                <ProductPrice>100000₮</ProductPrice>
-              </PriceDetail>
-            </Product>
           </Info>
           <Summary>
             <SummaryTitle>Нийт үнэ</SummaryTitle>
             <SummaryItem>
               <SummaryItemText>Үнэ</SummaryItemText>
-              <SummaryItemPrice>200000₮</SummaryItemPrice>
+              <SummaryItemPrice>{cart.total}₮</SummaryItemPrice>
             </SummaryItem>
             <SummaryItem>
               <SummaryItemText>Хүртгэлт</SummaryItemText>
@@ -237,7 +228,7 @@ const Cart = () => {
             </SummaryItem>
             <SummaryItem type="total">
               <SummaryItemText>Нийт</SummaryItemText>
-              <SummaryItemPrice>185000₮</SummaryItemPrice>
+              <SummaryItemPrice>{cart.total}₮</SummaryItemPrice>
             </SummaryItem>
             <Button>Худалдан авах</Button>
           </Summary>

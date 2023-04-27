@@ -10,7 +10,6 @@ const Container = styled.div``;
 const UserProfile = () => {
   return (
     <Container>
-      <Announcement />
       <Navbar />
 
       <div className="user-profile">
