@@ -51,6 +51,7 @@ const Agreement = styled.span`
 const Button = styled.button`
   width: 40%;
   border: none;
+  margin-top: 20px;
   padding: 15px 20px;
   background-color: teal;
   color: white;
@@ -101,41 +102,41 @@ const Register = () => {
   return (
     <Container>
       <Wrapper>
-        <Title>CREATE AN ACCOUNT</Title>
+        <Title>ШИНЭ ХЭРЭГЛЭГЧ ҮҮСГЭХ</Title>
         <Form>
           <Input
-            placeholder="name"
+            placeholder="Нэр"
             onChange={(e) => setFirstName(e.target.value)}
           />
           <Input
-            placeholder="last name"
+            placeholder="Овог"
             onChange={(e) => setLastName(e.target.value)}
           />
           <Input
-            placeholder="username"
+            placeholder="Хэрэглэгчийн нэр"
             onChange={(e) => setUsername(e.target.value)}
           />
           <Input
-            placeholder="email"
+            placeholder="Имэйл"
             onChange={(e) => setEmail(e.target.value)}
           />
           <Input
             type="password"
-            placeholder="password"
+            placeholder="Нууц үг"
             onChange={(e) => setPassword(e.target.value)}
           />
           <Input
             type="password"
-            placeholder="confirm password"
+            placeholder="Нууц үг давтах "
             onChange={(e) => setConfirmPassword(e.target.value)}
           />
 
-          <Agreement>
+          {/* <Agreement>
             By creating an account, I consent to the processing of my personal
             data in accordance with the <b>PRIVACY POLICY</b>
-          </Agreement>
+          </Agreement> */}
 
-          <Button onClick={handleClick}>CREATE</Button>
+          <Button onClick={handleClick}>Бүртгүүлэх</Button>
         </Form>
         {password !== confirmPassword && <Error>Passwords do not match</Error>}
       </Wrapper>

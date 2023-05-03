@@ -34,7 +34,7 @@ router.post("/login", async (req, res) => {
 
     const hashedPassword = CryptoJS.AES.decrypt(
       user.password,
-      process.env.PASS_SEC
+      process.env.PASS_SEC8
     );
     const OriginalPassword = hashedPassword.toString(CryptoJS.enc.Utf8);
 

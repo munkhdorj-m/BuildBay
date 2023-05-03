@@ -76,24 +76,24 @@ const Login = () => {
   return (
     <Container>
       <Wrapper>
-        <Title>SIGN IN</Title>
+        <Title>LOGIN</Title>
         <Form>
           <Input
-            placeholder="username"
+            placeholder="Хэрэглэгчийн нэр "
             onChange={(e) => setUsername(e.target.value)}
           />
           <Input
-            placeholder="password"
+            placeholder="Нууц үг"
             type="password"
             onChange={(e) => setPassword(e.target.value)}
           />
           <Button onClick={handleClick} disabled={isFetching}>
-            LOGIN
+            Нэвтрэх
           </Button>
           {error && console.log(error)}
-          {<Error>Something went wrong...</Error>}
-          <Link>DO NOT YOU REMEMBER THE PASSWORD?</Link>
-          <Link>CREATE A NEW ACCOUNT</Link>
+          {/* {<Error>Something went wrong...</Error>} */}
+          <Link>Нууц үгээ мартсан</Link>
+          <Link>Шинэ хэрэглэгч үүсгэх</Link>
         </Form>
       </Wrapper>
     </Container>

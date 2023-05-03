@@ -60,7 +60,7 @@ const ProductList = () => {
       <Title>{cat}</Title>
       <FilterContainer>
         <Filter>
-          <FilterText>Filter Products:</FilterText>
+          <FilterText>Бүтээгдэхүүний шүүлтүүр:</FilterText>
           <Select onChange={handleFilters}>
             <Option disabled>Color</Option>
             <Option>White</Option>
@@ -80,7 +80,7 @@ const ProductList = () => {
           </Select>
         </Filter>
         <Filter>
-          <FilterText>Sort Products:</FilterText>
+          <FilterText>Ангилах</FilterText>
           <Select onChange={(e) => setSort(e.target.value)}>
             <Option value="newest">Newest</Option>
             <Option value="asc">Price (asc)</Option>
@@ -89,7 +89,7 @@ const ProductList = () => {
         </Filter>
       </FilterContainer>
       <Products cat={cat} filters={filters} sort={sort} />
-      {/* <Three door={dataFromChild} /> */}
+      <Three />
       <Newsletter />
       <Footer />
     </Container>

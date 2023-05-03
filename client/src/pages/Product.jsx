@@ -168,10 +168,10 @@ const Product = () => {
         <InfoContainer>
           <Title>{product && product.title}</Title>
           <Desc>{product && product.desc}</Desc>
-          <Price>$ {product && product.price}</Price>
+          <Price>Үнэ: {product && product.price} ₮</Price>
           <FilterContainer>
             <Filter>
-              <FilterTitle>Color</FilterTitle>
+              <FilterTitle>Өнгө</FilterTitle>
               {product &&
                 product.color.map((c) => {
                   return (
@@ -184,7 +184,7 @@ const Product = () => {
                 })}
             </Filter>
             <Filter>
-              <FilterTitle>Size</FilterTitle>
+              <FilterTitle>Хэмжээ</FilterTitle>
               <FilterSize onChange={(e) => setSize(e.target.value)}>
                 {product &&
                   product.size.map((s) => {
