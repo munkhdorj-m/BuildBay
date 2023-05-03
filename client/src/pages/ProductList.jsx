@@ -89,7 +89,7 @@ const ProductList = () => {
         </Filter>
       </FilterContainer>
       <Products cat={cat} filters={filters} sort={sort} />
-      {/* <Three door={dataFromChild} /> */}
+      <Three />
       <Newsletter />
       <Footer />
     </Container>
