@@ -6,6 +6,7 @@ import Navbar from "../components/Navbar";
 import { mobile } from "../responsive";
 import { useDispatch, useSelector } from "react-redux";
 import { removeItem } from "../redux/cartRedux";
+import { Link } from "react-router-dom";
 
 const Container = styled.div``;
 
@@ -159,22 +160,24 @@ const Cart = () => {
   const cart = useSelector((state) => state.cart);
   console.log(cart.products);
   const dispatch = useDispatch();
-
+  const totalPrice = Math.abs(cart.total.toFixed(2));
   const handleRemove = (id) => {
     dispatch(removeItem(id));
   };
   return (
     <Container>
-      <Announcement />
+      {/* <Announcement /> */}
       <Navbar />
       <Wrapper>
         <Title>Таны сагс</Title>
         <Top>
-          <TopButton>Өөр бараа сонирхох</TopButton>
-          <TopTexts>
+          <Link to={`/productsw -/`}>
+            <TopButton>Өөр бараа сонирхох</TopButton>
+          </Link>
+          {/* <TopTexts>
             <TopText>Сагс(2)</TopText>
             <TopText>Сонирхсон (0)</TopText>
-          </TopTexts>
+          </TopTexts> */}
           {/* <TopButton type="filled">Тооцоо хийх</TopButton> */}
         </Top>
         <Bottom>
@@ -216,19 +219,15 @@ const Cart = () => {
             <SummaryTitle>Нийт үнэ</SummaryTitle>
             <SummaryItem>
               <SummaryItemText>Үнэ</SummaryItemText>
-              <SummaryItemPrice>{cart.total}₮</SummaryItemPrice>
+              <SummaryItemPrice>{totalPrice}₮</SummaryItemPrice>
             </SummaryItem>
             <SummaryItem>
               <SummaryItemText>Хүртгэлт</SummaryItemText>
               <SummaryItemPrice>5000₮</SummaryItemPrice>
             </SummaryItem>
-            <SummaryItem>
-              <SummaryItemText>Хямдрал</SummaryItemText>
-              <SummaryItemPrice>20000₮</SummaryItemPrice>
-            </SummaryItem>
             <SummaryItem type="total">
               <SummaryItemText>Нийт</SummaryItemText>
-              <SummaryItemPrice>{cart.total}₮</SummaryItemPrice>
+              <SummaryItemPrice>{totalPrice + 5000}₮</SummaryItemPrice>
             </SummaryItem>
             <Button>Худалдан авах</Button>
           </Summary>

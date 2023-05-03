@@ -1,9 +1,9 @@
 import styled from "styled-components";
 import { allProducts } from "../data";
 import {
-  FavoriteBorderOutlined,
   SearchOutlined,
   ShoppingCartOutlined,
+  VisibilityOutlined,
 } from "@mui/icons-material";
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
@@ -139,10 +139,14 @@ const Products = ({ cat, filters, sort }) => {
                 </Link>
               </Icon>
               <Icon>
-                <SearchOutlined />
+                <Link to={`/product/${item._id}`}>
+                  <SearchOutlined />
+                </Link>
               </Icon>
               <Icon>
-                <FavoriteBorderOutlined />
+                <Link>
+                  <VisibilityOutlined />
+                </Link>
               </Icon>
             </Info>
           </ProductContainer>
