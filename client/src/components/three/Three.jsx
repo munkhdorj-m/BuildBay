@@ -258,7 +258,6 @@ const Door = (props) => {
   const { nodes, materials } = useGLTF("models.glb");
 
   var materialName = "M_Rojo";
-  console.log(props.material != null);
   // if (props.material != null) {
   //   const str = props.material;
   //   materialName = str.substring(13, str.length - 4);
