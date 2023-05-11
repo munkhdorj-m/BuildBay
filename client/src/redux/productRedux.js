@@ -3,15 +3,15 @@ import { createSlice } from "@reduxjs/toolkit";
 const productSlice = createSlice({
   name: "product",
   initialState: {
-    id: null,
+    product: [],
   },
   reducers: {
-    updateProductId: (state, action) => {
-      state.id = action.payload;
+    updateProduct: (state, action) => {
+      state.product = action.payload;
     },
   },
 });
 
-export const { updateProductId } = productSlice.actions;
+export const { updateProduct } = productSlice.actions;
 
 export default productSlice.reducer;
