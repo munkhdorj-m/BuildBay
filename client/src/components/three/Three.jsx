@@ -13,6 +13,7 @@ import { useGesture } from "react-use-gesture";
 import { useControls } from "leva";
 import { proxy, useSnapshot } from "valtio";
 import { TextureLoader } from "three/src/loaders/TextureLoader";
+import { useSelector } from "react-redux";
 
 const state = proxy({
   dragging: false,
@@ -257,7 +258,7 @@ const LightSwitch = (props) => {
 const Door = (props) => {
   const { nodes, materials } = useGLTF("models.glb");
 
-  var materialName = "M_Rojo";
+  var materialName = props.material;
   // if (props.material != null) {
   //   const str = props.material;
   //   materialName = str.substring(13, str.length - 4);
@@ -266,7 +267,7 @@ const Door = (props) => {
   const material = materials[materialName];
   return (
     <mesh
-      geometry={nodes.Pta_07_Blq020.geometry}
+      geometry={nodes.Pta_07_Blq018.geometry}
       material={material}
       scale={0.8}
       position={props.position}
@@ -338,7 +339,9 @@ const Draggable = ({ children, position: p = [0, 0, 0], ...props }) => {
 
 const Three = (props) => {
   const snap = useSnapshot(state);
-
+  const product = useSelector((state) => state.product);
+  const material = product.product.model;
+  console.log(material);
   const {
     width: wallWidth,
     height: wallHeight,
@@ -436,7 +439,7 @@ const Three = (props) => {
           castShadow
         />
         <Suspense fallback={null}>
-          <Door position={doorPosition} material={props.door} />
+          <Door position={doorPosition} material={material} />
           <Plane position={[0, -1, 0]} color="white" />
           <PlaneWithTexture position={[0, -0.99, 0]} texture="Wood_Floor_010" />
           {/* first wall */}

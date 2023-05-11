@@ -8,9 +8,8 @@ import {
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import axios, { all } from "axios";
-import { addProduct } from "../redux/cartRedux";
 import { useDispatch, useSelector } from "react-redux";
-import { updateProductId } from "../redux/productRedux";
+import { updateProduct } from "../redux/productRedux";
 
 const Info = styled.div`
   opacity: 0;
@@ -82,8 +81,9 @@ const Container = styled.div`
 const Products = ({ cat, filters, sort }) => {
   const [products, setProducts] = useState();
   const [filteredProducts, setFilteredProducts] = useState();
-  const dispatch = useDispatch();
+
   const product = useSelector((state) => state.product);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     const getProducts = async () => {
@@ -146,7 +146,7 @@ const Products = ({ cat, filters, sort }) => {
                 <Link>
                   <SearchOutlined
                     onClick={() => {
-                      dispatch(updateProductId(item.id));
+                      dispatch(updateProduct(item));
                       console.log(product);
                     }}
                   />
