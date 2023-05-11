@@ -5,6 +5,8 @@ import Alert from "@mui/material/Alert";
 import { register } from "../redux/apiCalls";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Container = styled.div`
   width: 100vw;
@@ -89,12 +91,30 @@ const Register = () => {
         email,
         password,
       });
-      alert("Registration successful");
+      toast.success("Амжилттай бүртгэгдлээ", {
+        position: "top-center",
+        autoClose: 1000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
       navigate("/");
       // Registration successful
     } catch (error) {
       // Registration failed, handle error
-      alert("Registration failed");
+      toast.error("Алдаа гарлаа", {
+        position: "top-center",
+        autoClose: 1000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
       console.error(error);
     }
   };
@@ -137,8 +157,9 @@ const Register = () => {
           </Agreement> */}
 
           <Button onClick={handleClick}>Бүртгүүлэх</Button>
+          <ToastContainer />
         </Form>
-        {password !== confirmPassword && <Error>Passwords do not match</Error>}
+        {password !== confirmPassword && <Error>Нууц үг таарахгүй байна</Error>}
       </Wrapper>
     </Container>
   );

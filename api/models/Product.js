@@ -5,8 +5,18 @@ const ProductSchema = new mongoose.Schema(
     title: { type: String, required: true, unique: true },
     desc: { type: String, required: true },
     img: { type: String, required: true },
-    categories: { type: Array, index: true },
-    model: { type: Buffer, contentType: String },
+    categories: { type: Array },
+    model: [
+      {
+        modelId: {
+          type: String,
+        },
+        modelData: {
+          type: Number,
+          default: 1,
+        },
+      },
+    ],
     size: { type: Array },
     color: { type: Array },
     price: { type: Number, required: true, min: 0 },

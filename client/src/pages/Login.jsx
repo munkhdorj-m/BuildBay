@@ -3,6 +3,8 @@ import { mobile } from "../responsive";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { login } from "../redux/apiCalls";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Container = styled.div`
   width: 100vw;
@@ -50,6 +52,12 @@ const Button = styled.button`
   color: white;
   cursor: pointer;
   margin-bottom: 10px;
+  &:hover {
+    background: #22202e;
+  }
+  &:active {
+    transform: translateY(4px);
+  }
 `;
 
 const Link = styled.a`
@@ -69,9 +77,24 @@ const Login = () => {
   const dispatch = useDispatch();
   const { isFetching, error } = useSelector((state) => state.user);
 
-  const handleClick = (e) => {
+  const handleClick = async (e) => {
+    console.log("sadsadsad");
     e.preventDefault();
-    login(dispatch, { username, password });
+    try {
+      await login(dispatch, { username, password });
+    } catch (error) {
+      toast.error("Хэрэглэгчийн нэр эсвэл нууц үг буруу байна", {
+        position: "top-center",
+        autoClose: 1000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
+      console.error(error);
+    }
   };
   return (
     <Container>
@@ -87,13 +110,12 @@ const Login = () => {
             type="password"
             onChange={(e) => setPassword(e.target.value)}
           />
-          <Button onClick={handleClick} disabled={isFetching}>
-            Нэвтрэх
-          </Button>
+          <Button onClick={handleClick}>Нэвтрэх</Button>
           {error && console.log(error)}
           {/* {<Error>Something went wrong...</Error>} */}
           <Link>Нууц үгээ мартсан</Link>
           <Link>Шинэ хэрэглэгч үүсгэх</Link>
+          <ToastContainer />
         </Form>
       </Wrapper>
     </Container>
