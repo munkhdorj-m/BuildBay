@@ -158,8 +158,8 @@ const Button = styled.button`
 
 const Cart = () => {
   const cart = useSelector((state) => state.cart);
-  console.log(cart.products);
   const dispatch = useDispatch();
+
   const totalPrice = Math.abs(cart.total.toFixed(2));
   const handleRemove = (id) => {
     dispatch(removeItem(id));
@@ -207,9 +207,7 @@ const Cart = () => {
 
                     <ProductAmount>{product.quantity}ш</ProductAmount>
                   </ProductAmountContainer>
-                  <ProductPrice>
-                    $ {product.price * product.quantity}
-                  </ProductPrice>
+                  <ProductPrice>{product.price}₮</ProductPrice>
                 </PriceDetail>
               </Product>
             ))}
