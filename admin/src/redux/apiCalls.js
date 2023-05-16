@@ -1,4 +1,5 @@
 import {
+  logoutStart,
   loginFailure,
   loginStart,
   loginSuccess,
@@ -119,4 +120,8 @@ export const addUser = async (user, dispatch) => {
   } catch (err) {
     dispatch(addUserFailure());
   }
+};
+
+export const logout = async (dispatch) => {
+  dispatch(logoutStart());
 };

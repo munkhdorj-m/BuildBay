@@ -46,12 +46,12 @@ export default function Home() {
   return (
     <div className="home">
       <FeaturedInfo />
-      <Chart
+      {/* <Chart
         data={userStats}
         title="Хэрэглэгчийн аналитик"
         grid
         dataKey="Active User"
-      />
+      /> */}
       <div className="homeWidgets">
         <WidgetSm />
         <WidgetLg />

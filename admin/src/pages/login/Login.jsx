@@ -1,16 +1,22 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { login } from "../../redux/apiCalls";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const dispatch = useDispatch();
+  let navigate = useNavigate();
 
   const handleClick = (e) => {
-    console.log("first");
     e.preventDefault();
-    login(dispatch, { username, password });
+    try {
+      login(dispatch, { username, password });
+      navigate("/");
+    } catch (err) {}
   };
 
   return (

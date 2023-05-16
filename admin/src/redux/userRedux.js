@@ -80,10 +80,14 @@ const userSlice = createSlice({
       state.isFetching = false;
       state.error = true;
     },
+    logoutStart: (state) => {
+      state.currentUser = null;
+    },
   },
 });
 
 export const {
+  logoutStart,
   loginStart,
   loginSuccess,
   loginFailure,

@@ -14,13 +14,13 @@ import { useSelector } from "react-redux";
 import AllOrder from "./pages/orderList/AllOrder";
 
 function App() {
-  const admin = useSelector((state) => state.user.currentUser.isAdmin);
+  const admin = useSelector((state) => state.user.currentUser?.isAdmin);
   return (
     <>
       <Routes>
         <Route path="/login" element={<Login />} />
       </Routes>
-      {admin && (
+      {admin ? (
         <>
           <Topbar />
           <div className="container">
@@ -38,6 +38,8 @@ function App() {
             </Routes>
           </div>
         </>
+      ) : (
+        <div>You are not admin</div>
       )}
     </>
   );

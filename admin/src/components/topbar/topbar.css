@@ -28,7 +28,9 @@
 }
 
 .topbarIconContainer {
-  position: relative;
+  margin: 30px;
+  padding: 20px;
+  position: static;
   cursor: pointer;
   margin-right: 10px;
   color: #555;
