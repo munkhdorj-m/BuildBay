@@ -75,6 +75,7 @@ const Wall = ({
   holes = [],
   position,
   rotation,
+  wallTexture,
 }) => {
   const props = useTexture({
     map: "Stylized_Bricks_002/Stylized_Bricks_002_basecolor.jpg",
@@ -91,10 +92,21 @@ const Wall = ({
   props.aoMap.wrapS = props.aoMap.wrapT = THREE.RepeatWrapping;
   props.aoMap.repeat.set(3, 3);
 
-  const material = new THREE.MeshStandardMaterial({
-    color: color,
-    ...props,
+  const prop = useTexture({
+    map: "Pattern02_1K/Pattern02_1K_VarA.png",
   });
+  prop.map.wrapS = prop.map.wrapT = THREE.RepeatWrapping;
+  prop.map.repeat.set(5, 5);
+
+  const material = wallTexture
+    ? new THREE.MeshStandardMaterial({
+        color: color,
+        ...prop,
+      })
+    : new THREE.MeshStandardMaterial({
+        color: color,
+        ...props,
+      });
 
   const geometry = new THREE.BoxGeometry(width, height, depth);
   let wall = new THREE.Mesh(geometry, material);
@@ -121,9 +133,60 @@ const SkirtingBoard = ({ width, height, color, ...props }) => (
   </mesh>
 );
 
-const Window = ({ color, ...props }) => {
+const Window = ({ window, color, ...props }) => {
   const { nodes, materials } = useGLTF("windows.glb");
-  return (
+  console.log(window);
+  return window ? (
+    <group dispose={null} {...props}>
+      <group
+        position={[0, 0, -0.05]}
+        rotation={[-Math.PI / 2, 0, 0]}
+        scale={0.4}
+      >
+        <group>
+          <mesh
+            geometry={nodes.casement_bridged_frame_frame1_0.geometry}
+            material={nodes.casement_bridged_frame_frame1_0.material}
+            material-color={color}
+          />
+        </group>
+        <group rotation={[0, 0, 0]} position={[-0.96, 0, 0]} scale={1.08}>
+          <mesh
+            name="sliding_horizontal_windowR_frame2_0"
+            geometry={nodes.sliding_horizontal_windowL_frame2_0.geometry}
+            material={materials.frame2}
+          />
+          <mesh
+            name="sliding_horizontal_windowR_glass_0"
+            geometry={nodes.sliding_horizontal_windowL_glass_0.geometry}
+            material={materials.glass}
+          />
+          <mesh
+            name="sliding_horizontal_windowR_parts_0"
+            geometry={nodes.sliding_horizontal_windowL_parts_0.geometry}
+            material={materials.parts}
+          />
+        </group>
+        <group rotation={[0, 0, 0]} position={[0.97, 0, 0]} scale={1.08}>
+          <mesh
+            name="sliding_horizontal_windowR_frame2_0"
+            geometry={nodes.sliding_horizontal_windowR_frame2_0.geometry}
+            material={materials.frame2}
+          />
+          <mesh
+            name="sliding_horizontal_windowR_glass_0"
+            geometry={nodes.sliding_horizontal_windowR_glass_0.geometry}
+            material={materials.glass}
+          />
+          <mesh
+            name="sliding_horizontal_windowR_parts_0"
+            geometry={nodes.sliding_horizontal_windowR_parts_0.geometry}
+            material={materials.parts}
+          />
+        </group>
+      </group>
+    </group>
+  ) : (
     <group dispose={null} {...props}>
       <group
         position={[0, 0, -0.05]}
@@ -291,10 +354,10 @@ const Plane = (props) => {
 
 const PlaneWithTexture = (props) => {
   const textures = useTexture({
-    map: `${props.texture}/${props.texture}_basecolor.jpg`,
-    normalMap: `${props.texture}/${props.texture}_normal.jpg`,
-    roughnessMap: `${props.texture}/${props.texture}_roughness.jpg`,
-    aoMap: `${props.texture}/${props.texture}_ambientocclusion.jpg`,
+    map: `${props.texture}/${props.texture}_basecolor.png`,
+    normalMap: `${props.texture}/${props.texture}_normal.png`,
+    roughnessMap: `${props.texture}/${props.texture}_roughness.png`,
+    aoMap: `${props.texture}/${props.texture}_ambientocclusion.png`,
   });
   textures.map.wrapS = textures.map.wrapT = THREE.RepeatWrapping;
   textures.map.repeat.set(3, 3);
@@ -337,11 +400,15 @@ const Draggable = ({ children, position: p = [0, 0, 0], ...props }) => {
   );
 };
 
-const Three = (props) => {
+const Three = () => {
   const snap = useSnapshot(state);
   const product = useSelector((state) => state.product);
+  const isDoor = product.product.categories[0] == "door";
+  const isWindow = product.product.categories[0] == "window";
+  const isWall = product.product.categories[0] == "wall";
+  const isFloor = product.product.categories[0] == "floor";
   const material = product.product.model;
-  console.log(material);
+
   const {
     width: wallWidth,
     height: wallHeight,
@@ -410,7 +477,7 @@ const Three = (props) => {
     position: windowPosition,
     colour: windowColor,
   } = useControls("Window", {
-    showWindow: false,
+    showWindow: true,
     colour: "#fff",
     position: [0, 0.35, 0],
   });
@@ -439,9 +506,15 @@ const Three = (props) => {
           castShadow
         />
         <Suspense fallback={null}>
-          <Door position={doorPosition} material={material} />
+          <Door
+            position={doorPosition}
+            material={isDoor ? material : "M_Chocolate"}
+          />
           <Plane position={[0, -1, 0]} color="white" />
-          <PlaneWithTexture position={[0, -0.99, 0]} texture="Wood_Floor_010" />
+          <PlaneWithTexture
+            position={[0, -0.99, 0]}
+            texture={isFloor ? material : "Parquet"}
+          />
           {/* first wall */}
           <Wall
             width={wallWidth}
@@ -450,6 +523,7 @@ const Three = (props) => {
             holes={windowHoles}
             position={[0, 0, 3]}
             rotation={[0, 0, 0]}
+            wallTexture={isWall}
           >
             {showSkirting && (
               <SkirtingBoard
@@ -459,12 +533,17 @@ const Three = (props) => {
               />
             )}
             {showWindow && (
-              <Window position={windowPosition} color={windowColor} />
+              <Window
+                position={windowPosition}
+                color={windowColor}
+                window={isWindow ? true : false}
+              />
             )}
           </Wall>
 
           {/* second wall */}
           <Wall
+            wallTexture={isWall}
             width={wallWidth * 2}
             height={wallHeight}
             color={wallColor}
@@ -492,6 +571,7 @@ const Three = (props) => {
 
           {/* third wall */}
           <Wall
+            wallTexture={isWall}
             width={wallWidth}
             height={wallHeight}
             color={wallColor}
@@ -507,12 +587,17 @@ const Three = (props) => {
               />
             )}
             {showWindow && (
-              <Window position={windowPosition} color={windowColor} />
+              <Window
+                position={windowPosition}
+                color={windowColor}
+                window={isWindow ? true : false}
+              />
             )}
           </Wall>
 
           {/* fourth wall */}
           <Wall
+            wallTexture={isWall}
             width={wallWidth * 2}
             height={wallHeight}
             color={wallColor}

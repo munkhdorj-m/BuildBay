@@ -3,51 +3,51 @@ import "./newUser.css";
 export default function NewUser() {
   return (
     <div className="newUser">
-      <h1 className="newUserTitle">New User</h1>
+      <h1 className="newUserTitle">Шинэ хэрэглэгч үүсгэх</h1>
       <form className="newUserForm">
         <div className="newUserItem">
-          <label>Username</label>
+          <label>Хэрэглэгчийн нэр</label>
           <input type="text" placeholder="john" />
         </div>
         <div className="newUserItem">
-          <label>Full Name</label>
+          <label>Бүтэн нэр</label>
           <input type="text" placeholder="John Smith" />
         </div>
         <div className="newUserItem">
-          <label>Email</label>
+          <label>Имэйл</label>
           <input type="email" placeholder="john@gmail.com" />
         </div>
         <div className="newUserItem">
-          <label>Password</label>
+          <label>Нүүц үг</label>
           <input type="password" placeholder="password" />
         </div>
         <div className="newUserItem">
-          <label>Phone</label>
-          <input type="text" placeholder="+1 123 456 78" />
+          <label>Утас</label>
+          <input type="text" placeholder="+976 99222888" />
         </div>
         <div className="newUserItem">
-          <label>Address</label>
+          <label>Хаяг</label>
           <input type="text" placeholder="New York | USA" />
         </div>
         <div className="newUserItem">
-          <label>Gender</label>
+          <label>Хүйс</label>
           <div className="newUserGender">
             <input type="radio" name="gender" id="male" value="male" />
-            <label for="male">Male</label>
+            <label for="male">Эр</label>
             <input type="radio" name="gender" id="female" value="female" />
-            <label for="female">Female</label>
+            <label for="female">Эмэгтэй</label>
             <input type="radio" name="gender" id="other" value="other" />
-            <label for="other">Other</label>
+            <label for="other">Бусад</label>
           </div>
         </div>
         <div className="newUserItem">
-          <label>Active</label>
+          <label>Идэвхтэй</label>
           <select className="newUserSelect" name="active" id="active">
-            <option value="yes">Yes</option>
-            <option value="no">No</option>
+            <option value="yes">Тийм</option>
+            <option value="no">Үгүй</option>
           </select>
         </div>
-        <button className="newUserButton">Create</button>
+        <button className="newUserButton">Үүсгэх</button>
       </form>
     </div>
   );

@@ -9,8 +9,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../redux/apiCalls";
 import { resetCart } from "../redux/cartRedux";
 const links = [
-  { to: "/products", label: "Бүх бараа" },
-  { to: "/products/haalga", label: "Хаалга" },
+  { to: "/products", label: "Барааны жагсаалт" },
+  // { to: "/products/haalga", label: "Хаалга" },
   // { to: "/products", label: "Обой" },
   // { to: "/products", label: "Цонх" },
   // { to: "/products", label: "Шал" },

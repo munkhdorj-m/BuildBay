@@ -7,6 +7,7 @@ import ProductList from "./pages/ProductList";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import { useSelector } from "react-redux";
+import Checkout from "./pages/Checkout";
 
 function App() {
   const user = useSelector((state) => state.user.currentUser);
@@ -22,6 +23,7 @@ function App() {
       <Route path="/product" element={<Product />}>
         <Route path=":id" element={<ProductList />} />
       </Route>
+      <Route path="/checkout" element={<Checkout />} />
       <Route path="/profile" element={<UserProfile />} />
       <Route path="/products" element={<ProductList />}>
         <Route path=":category" element={<ProductList />} />

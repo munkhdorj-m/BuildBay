@@ -4,10 +4,14 @@ export const productSlice = createSlice({
   name: "product",
   initialState: {
     products: [],
+    product: [],
     isFetching: false,
     error: false,
   },
   reducers: {
+    updateProduct: (state, action) => {
+      state.product = action.payload;
+    },
     //GET ALL
     getProductStart: (state) => {
       state.isFetching = true;
@@ -81,6 +85,7 @@ export const {
   addProductStart,
   addProductSuccess,
   addProductFailure,
+  updateProduct,
 } = productSlice.actions;
 
 export default productSlice.reducer;

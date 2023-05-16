@@ -151,7 +151,15 @@ const SummaryItemPrice = styled.span``;
 const Button = styled.button`
   width: 100%;
   padding: 10px;
-  background-color: black;
+  border-radius: 8px;
+  background: #5a45f2;
+  box-shadow: 0 2px #666;
+  &:hover {
+    background: #22202e;
+  }
+  &:active {
+    transform: translateY(4px);
+  }
   color: white;
   font-weight: 600;
 `;
@@ -171,7 +179,7 @@ const Cart = () => {
       <Wrapper>
         <Title>Таны сагс</Title>
         <Top>
-          <Link to={`/productsw -/`}>
+          <Link to={`/products`}>
             <TopButton>Өөр бараа сонирхох</TopButton>
           </Link>
           {/* <TopTexts>
@@ -211,7 +219,6 @@ const Cart = () => {
                 </PriceDetail>
               </Product>
             ))}
-            <Hr />
           </Info>
           <Summary>
             <SummaryTitle>Нийт үнэ</SummaryTitle>
@@ -220,14 +227,16 @@ const Cart = () => {
               <SummaryItemPrice>{totalPrice}₮</SummaryItemPrice>
             </SummaryItem>
             <SummaryItem>
-              <SummaryItemText>Хүртгэлт</SummaryItemText>
+              <SummaryItemText>Хүргэлт</SummaryItemText>
               <SummaryItemPrice>5000₮</SummaryItemPrice>
             </SummaryItem>
             <SummaryItem type="total">
               <SummaryItemText>Нийт</SummaryItemText>
               <SummaryItemPrice>{totalPrice + 5000}₮</SummaryItemPrice>
             </SummaryItem>
-            <Button>Худалдан авах</Button>
+            <Link to={"/checkout"}>
+              <Button>Худалдан авах</Button>
+            </Link>
           </Summary>
         </Bottom>
       </Wrapper>

@@ -99,7 +99,7 @@ const Login = () => {
   return (
     <Container>
       <Wrapper>
-        <Title>LOGIN</Title>
+        <Title>Нэвтрэх</Title>
         <Form>
           <Input
             placeholder="Хэрэглэгчийн нэр "
